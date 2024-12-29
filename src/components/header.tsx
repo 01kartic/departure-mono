@@ -70,7 +70,7 @@ export function Header() {
   );
 }
 
-const DEPARTURE = "DEPARTURE";
+const DEPARTURE = "ARRIVAL";
 const MONO = "MONO";
 const COGNATES: Record<string, string> = {
   E: "3ΣΞ€Ǝ",
