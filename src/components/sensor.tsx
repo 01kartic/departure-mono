@@ -4,13 +4,14 @@ import "./sensor.css";
 export function Sensor() {
   const [val, setVal] = createSignal<number>(0);
   createEffect(() => {
-    (function rand() {
-      setVal(Math.floor(Math.random() * 100));
-      setTimeout(rand, Math.random() * 200 + 50);
-    })();
-    // window.addEventListener("mousemove", (e) => {
-    //   setVal(Math.max(0, Math.min(99, Math.abs(e.movementX) + Math.abs(e.movementY))));
-    // });
+    function scrollPercent() {
+      const scroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      setVal(100 - Math.round((scroll / height) * 100));
+    }
+
+    window.addEventListener("scroll", scrollPercent);
+    return () => window.removeEventListener("scroll", scrollPercent);
   });
 
   return <span id="sensor">{val().toString().padStart(2, "0")}</span>;
